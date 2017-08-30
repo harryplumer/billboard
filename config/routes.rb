@@ -2,8 +2,10 @@ Rails.application.routes.draw do
   root 'charts#index'
   
   resources :artists do
-    resources :songs, only: [:edit, :new, :create]
+    resources :songs, only: [:edit, :new, :create, :destroy, :update]
   end
+
+  patch '/chart/:id/song/:song_id', to: 'charts#add_song_to_chart', as: "song_to_chart"
   
   resources :charts
 

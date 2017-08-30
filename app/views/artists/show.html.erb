@@ -1,2 +1,19 @@
-<h1>Artists#show</h1>
-<p>Find me in app/views/artists/show.html.erb</p>
+<h1><%= @artist.name %></h1>
+<h3>Songs</h3>
+<table>
+  <thead>
+    <tr><th>Title</th><th>Edit</th><th>Delete</th>
+  </thead>
+  <tbody> 
+    <% @artist.songs.each do |song| %>
+      <tr>
+        <td><%= song.title %></td>
+        <td><%= link_to "Edit", edit_artist_song_path(@artist, song) %></td>
+        <td><%= link_to "Delete", artist_song_path(@artist, song), method: :delete %></td>
+      </tr>
+    <% end %>
+  </tbody>
+  
+</table>
+<%= link_to "Add Song", new_artist_song_path(@artist) %>
+<%= link_to "Back To Artists", artists_path%>

@@ -1,2 +1,34 @@
-<h1>Charts#show</h1>
-<p>Find me in app/views/charts/show.html.erb</p>
+<h1><%= @chart.name %></h1>
+<div style="width: 49%; display: inline-block; vertical-align: top;">
+<h3>Songs On Chart</h3>
+  <table>
+    <thead>
+      <tr><th>Title</th><th>Artist</th><th></th></tr>
+    </thead>
+    <tbody>
+      <% @chart.songs.each do |song| %>
+        <tr>
+          <td><%= song.title %></td>
+          <td><%= song.artist.name %></td>
+          <td><%= link_to "Edit Song", edit_artist_song_path(song.artist, song)%></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<%= link_to "Back To Charts", charts_path %>
+</div>
+
+<div style="width: 49%; display: inline-block; vertical-align: top;">
+  <h3> Click Songs to add </h3>
+  <% @artists.each do |artist| %>
+    <h4><%= artist.name %></h4>
+    <ul>
+    <% artist.songs.each do |song| %>
+      <% if song.chart != @chart %>
+        <li><%= link_to song.title, song_to_chart_path(@chart, song), method: :patch %></li>
+      <% end %>
+    <% end %>
+    </ul>
+  <% end %>
+<%= link_to "Add New Artist", new_artist_path %>
+</div>

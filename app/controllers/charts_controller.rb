@@ -1,11 +1,12 @@
 class ChartsController < ApplicationController
-  before_action :set_chart, only: [:show, :update, :edit, :destroy]
+  before_action :set_chart, only: [:show, :update, :edit, :destroy, :add_song_to_chart]
   
   def index
     @charts = Chart.all
   end
 
   def show
+    @artists = Artist.all
   end
 
   def new
@@ -37,6 +38,12 @@ class ChartsController < ApplicationController
   def destroy
     @chart.destroy
     redirect_to charts_path
+  end
+
+  def add_song_to_chart
+    @song = Song.find(params[:song_id])
+    @chart.songs << @song
+      redirect_to chart_path(@chart)
   end
 
   private
