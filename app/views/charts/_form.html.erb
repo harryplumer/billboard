@@ -1,0 +1,7 @@
+<h1><%= @chart.id ? 'Edit Chart' : 'Create Chart' %></h1>
+<hr />
+<%= form_for @chart do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name, required: true, autofocus: true %>
+  <%= f.submit %>
+<% end %>

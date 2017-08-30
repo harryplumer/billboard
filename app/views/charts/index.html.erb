@@ -1,0 +1,18 @@
+<h1>Welcome To Billboard!</h1>
+<table>
+  <thead>
+    <tr><th>Chart Name</th><th></th><th></th><th></th></tr>
+  </thead>
+  <tbody>
+    <% @charts.each do |chart| %>
+      <tr>
+        <td><%= chart.name %></td>
+        <td><%= link_to "View", chart %></td>
+        <td><%= link_to "Edit", edit_chart_path(chart) %></td>
+        <td><%= link_to "Delete", chart_path(chart), method: :delete %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= link_to "Add New Chart", new_chart_path %>
+<%= link_to "View & Add Artists", artists_path%>
