@@ -16,7 +16,7 @@
               <td><%= song.title %></td>
               <td><%= song.artist.name %></td>
               <td><%= link_to "Edit", edit_artist_song_path(song.artist, song)%></td>
-              <td><%= link_to "Remove", remove_from_chart_path(@chart, song), method: :patch %></td>
+              <td><%= link_to "Remove", remove_song_from_chart_path(@chart, song), method: :delete %></td>
             </tr>
           <% end %>
         </tbody>

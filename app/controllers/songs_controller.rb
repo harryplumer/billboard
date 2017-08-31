@@ -34,14 +34,6 @@ class SongsController < ApplicationController
     redirect_to artist_path(artist)
   end
 
-  def remove_song_from_chart
-    binding.pry
-    @chart = Chart.find(params[:chart_id])
-    @song.chart = nil
-    @song.save
-    redirect_to chart_path(@chart)
-  end
-
   private
     def set_artist 
       @artist = Artist.find(params[:artist_id])
