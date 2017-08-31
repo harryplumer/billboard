@@ -1,5 +1,8 @@
+<header class="container">
 <h1>View All Artists</h1>
-<table>
+</header>
+<section class="container">
+<table class="table song_table">
   <thead>
     <tr><th>Artist Name</th><th></th><th></th><th></th></tr>
   </thead>
@@ -15,4 +18,6 @@
   </tbody>
 </table>
 <%= link_to "Add New Artist", new_artist_path %>
+<br />
 <%= link_to "Back To Charts", charts_path %>
+</section>
