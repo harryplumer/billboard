@@ -1,6 +1,8 @@
+require 'pry'
+
 class SongsController < ApplicationController
-  before_action :set_artist, except: [:add_song_to_chart]
-  before_action :set_song, only:[:edit, :update, :destroy, :add_song_to_chart]
+  before_action :set_artist
+  before_action :set_song, only:[:edit, :update, :destroy, :remove_song_from_chart]
   
   def edit
   end
@@ -30,6 +32,14 @@ class SongsController < ApplicationController
     artist = @song.artist
     @song.destroy
     redirect_to artist_path(artist)
+  end
+
+  def remove_song_from_chart
+    binding.pry
+    @chart = Chart.find(params[:chart_id])
+    @song.chart = nil
+    @song.save
+    redirect_to chart_path(@chart)
   end
 
   private

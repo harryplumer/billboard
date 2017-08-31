@@ -1,34 +1,47 @@
+<header class="container">
 <h1><%= @chart.name %></h1>
-<div style="width: 49%; display: inline-block; vertical-align: top;">
-<h3>Songs On Chart</h3>
-  <table>
-    <thead>
-      <tr><th>Title</th><th>Artist</th><th></th></tr>
-    </thead>
-    <tbody>
-      <% @chart.songs.each do |song| %>
-        <tr>
-          <td><%= song.title %></td>
-          <td><%= song.artist.name %></td>
-          <td><%= link_to "Edit Song", edit_artist_song_path(song.artist, song)%></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-<%= link_to "Back To Charts", charts_path %>
-</div>
+</header>
 
-<div style="width: 49%; display: inline-block; vertical-align: top;">
-  <h3> Click Songs to add </h3>
-  <% @artists.each do |artist| %>
-    <h4><%= artist.name %></h4>
-    <ul>
-    <% artist.songs.each do |song| %>
-      <% if song.chart != @chart %>
-        <li><%= link_to song.title, song_to_chart_path(@chart, song), method: :patch %></li>
+<section class="container">
+  <div class="row">
+    <div class="col-sm">
+    <h3>Songs On Chart</h3>
+      <table class="table song_table">
+        <thead>
+          <tr><th>Title</th><th>Artist</th><th></th><th></th></tr>
+        </thead>
+        <tbody>
+          <% @chart.songs.each do |song| %>
+            <tr>
+              <td><%= song.title %></td>
+              <td><%= song.artist.name %></td>
+              <td><%= link_to "Edit", edit_artist_song_path(song.artist, song)%></td>
+              <td><%= link_to "Remove", remove_from_chart_path(@chart, song), method: :patch %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <%= link_to "Back To Charts", charts_path %>
+    </div>
+
+    <div class="col-sm">
+      <h3> Click Songs to add </h3>
+      <% @artists.each do |artist| %>
+        <h5><%= artist.name %></h5>
+        <table class="table song_table">
+          <tbody>
+          <% artist.songs.each do |song| %>
+          <% if song.chart != @chart %>
+            <tr>
+              <td><%= link_to song.title, song_to_chart_path(@chart, song), method: :patch %></td>
+              <td><%= link_to "Edit Song",edit_artist_song_path(artist, song)%></td>
+            </tr>
+          <% end %>
+        <% end %>
+          </tbody>
+        </table>
       <% end %>
-    <% end %>
-    </ul>
-  <% end %>
-<%= link_to "Add New Artist", new_artist_path %>
-</div>
+    <%= link_to "Add New Artist", new_artist_path %>
+    </div>
+  </div>
+</section>

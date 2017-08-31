@@ -1,5 +1,6 @@
 class ChartsController < ApplicationController
   before_action :set_chart, only: [:show, :update, :edit, :destroy, :add_song_to_chart]
+  before_action :set_song, only: [:add_song_to_chart, :remove_song_from_chart]
   
   def index
     @charts = Chart.all
@@ -41,15 +42,19 @@ class ChartsController < ApplicationController
   end
 
   def add_song_to_chart
-    @song = Song.find(params[:song_id])
     @chart.songs << @song
-      redirect_to chart_path(@chart)
+    redirect_to chart_path(@chart)
   end
+
 
   private
     def set_chart
       @chart = Chart.find(params[:id])
     end
+
+    def set_song
+      @song = Song.find(params[:song_id])
+    end 
 
     def chart_params
       params.require(:chart).permit(:name)
